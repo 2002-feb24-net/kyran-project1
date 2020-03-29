@@ -1,0 +1,84 @@
+project 0: store application
+Feb 24 2020 Arlington .NET Extended / Nick Escalona
+
+functionality:
+---place orders to store locations for customers(// ask for user input based on zicode, )
+---add a new customer(// by using list and usng the ".Add" Method)
+---search customers by name (// Search by using list and contains method)
+
+
+---display details of an order (class printDetails)
+---display all order history of a store location (class printDetails)
+---display all order history of a customer (class printDetails)
+
+
+---input validation
+-(optional: order history can be sorted by earliest, latest, cheapest, most expensive)
+-(optional: get a suggested order for a customer based on his order history)
+-(optional: display some statistics based on order history)
+
+
+
+
+ACTUAL PROGRAM PSEUDO-CODE:
+
+
+
+public static void Main(string[] args)
+{
+    1) Prompt the user with a switch statment.
+    2) Run a while loop that will ask the user witch case they would like to run until they choose to shut down the program.
+    3) Make enums for switch case parameters and cases.
+    4) all cases of the switch statment in some form will run a method pertaining to the store.
+    5) Make sure there is some form of input validation or Exception Handling.
+}
+
+
+
+class storeOrders
+{
+    1) A collection list full of the orders that have been placed.
+    2) A collection Dictionary for store locations and the video games that they have in stock/inventory.
+    3) Prompt the user what location they would like to place an order from.
+    4) Link the orders to the specified store location, adding the order to the list /Dictionary.
+
+}
+
+
+
+
+class addCustomer
+{
+    1) Create a Dictionary that stores the new customer information for the store membership.
+    2) Prompt the user to input their name so that they are added into the system.
+    3) Tell the console to accept the user input, so that the information will be stored into the List<>
+            i) Ask for Name, Address, and Phone Number.
+            ii) Generate UserID or ProfileID based off random.seed function
+            iii) Make a list of Dictionary so that we can sort and search by name, returning the customers details.
+                       DICTIONARY:
+                            *) The Key should be the profile ID so that there is no Duplicates/ Ask the user to set their profile ID.
+                            **) The Value of the dictionary should be the object of the class that stores the customers information [Address, Phone Number].
+                       LIST:
+                            *) The list should 
+    4) Make sure there is some form of input validation or Exception Handling.
+
+}
+
+class searchName
+{
+    1) Prompt the user who they would like to search for.
+    2) Run a function ".Contains()" to find the results of the specified name.
+    3) Make sure there is some form of input validation or Exception Handling.
+}
+
+
+class printDetails
+{
+    1) This method should simply print the details of specified option choice of the user.
+            i) Print the order summary once customer has reached checkout.
+            ii) Print the order history of the specified customer.
+            iii) Print the order history of all the store orders, based on store location.
+    
+}
+
+

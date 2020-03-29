@@ -1,0 +1,6 @@
+﻿LOCATIONS:
+
+	-Long Beach, Ca
+	-New York, Ny
+	-Dallas, Tx
+	-Miami, Fl
