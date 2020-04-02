@@ -30,6 +30,6 @@ steps:
 #     ls
 #   displayName:directory contents
 
-- script: dotnet build *sln 
+- script: dotnet build 
   workingDirectory: ./kyran-project1
   displayName: dotnet build
