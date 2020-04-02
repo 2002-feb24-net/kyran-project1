@@ -31,5 +31,5 @@ steps:
 #   displayName:directory contents
 
 - script: dotnet build *sln 
-  workingDirectory: .
+  workingDirectory: ./kyran-project1
   displayName: dotnet build
