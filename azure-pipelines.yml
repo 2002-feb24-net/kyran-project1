@@ -31,5 +31,5 @@ steps:
 #   displayName:directory contents
 
 - script: dotnet build 
-  workingDirectory: ./kyran-project1
+  workingDirectory: /c/Revature/My_Repo/kyran-p1/kyran-project1
   displayName: dotnet build
