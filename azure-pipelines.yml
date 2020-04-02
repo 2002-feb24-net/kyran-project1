@@ -14,7 +14,7 @@ trigger:
 # this configuration says: "use Microsoft's hosted Ubuntu Linux virtual machines"
 # (we could, if we wanted, have it connect to a machine WE control to run the job on)
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 # the steps in the job
 # "script" is one kind of step - on linux it'll run in bash
