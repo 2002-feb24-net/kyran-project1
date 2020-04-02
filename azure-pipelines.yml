@@ -29,6 +29,7 @@ steps:
      echo "Showing current directory contents"
      ls
      displayName: 'directory contents'
+     
 
 
  - script: dotnet build 
