@@ -25,11 +25,12 @@ steps:
 # - script: echo Hello, world!
 #   displayName: Print hello world
 
-# - script: |
-#     echo "Showing current directory contents"
-#     ls
-#   displayName:directory contents
+ - script: |
+     echo "Showing current directory contents"
+     ls
+     displayName: 'directory contents'
 
-- script: dotnet build 
-  workingDirectory: /c/Revature/My_Repo/kyran-p1/kyran-project1
-  displayName: dotnet build
+
+ - script: dotnet build 
+   workingDirectory: /c/Revature/My_Repo/kyran-p1/kyran-project1
+   displayName: dotnet build
