@@ -22,7 +22,7 @@ namespace GameRealmWeb.Controllers
         // GET: Locations
         public IActionResult Index()
         {
-            return View( ctx.Locations.ToListAsync());
+            return View( ctx.Locations.ToList());
         }
 
         // GET: Locations/Details/5
