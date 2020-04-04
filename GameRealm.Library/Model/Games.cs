@@ -1,30 +1,25 @@
-using GameRealm.Interface;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace GameRealm.Library
+namespace GameRealm.Domain.Model
 {
-    public class Games : IDataProduct
+    public partial class Games
     {
-        // make an object to hold hot wings and price, cola drink and price
-        public int GameID { get; set; }
-        public string GameName { get; set; }
-        public decimal? Cost { get; set; }
-
-        // previously had a dictionary, but the class already links Name and Price so do not need a dictionary
-
-        public Games (string name, decimal? price)
+        public Games()
         {
-            GameName = name;
-            Cost = price;
-
-            //DecrementInventory();
+            Inventory = new HashSet<Inventory>();
+            Orderline = new HashSet<Orderline>();
         }
 
+        public int ProductId { get; set; }
+        public string Title { get; set; }
+        public string Genre { get; set; }
+        public DateTime? Release { get; set; }
+        public decimal Price { get; set; }
+        public int? Quantity { get; set; }
+        public string image { get; set; }
 
-
-
-
-
+        public virtual ICollection<Inventory> Inventory { get; set; }
+        public virtual ICollection<Orderline> Orderline { get; set; }
     }
 }

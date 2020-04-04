@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GameRealm.DataAccess\GameRealm.DataAccess.csproj" />
+    <ProjectReference Include="..\GameRealm.Library\GameRealm.Domain.csproj" />
   </ItemGroup>
 
 

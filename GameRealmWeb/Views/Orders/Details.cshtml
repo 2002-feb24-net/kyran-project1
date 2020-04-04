@@ -1,4 +1,4 @@
-﻿@model GameRealm.Domain.Model.Inventory
+﻿@model GameRealm.Domain.Model.Orders
 
 @{
     ViewData["Title"] = "Details";
@@ -7,20 +7,26 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Inventory</h4>
+    <h4>Orders</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Quantity)
+            @Html.DisplayNameFor(model => model.Time)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Quantity)
+            @Html.DisplayFor(model => model.Time)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Product)
+            @Html.DisplayNameFor(model => model.Checkout)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Product.Title)
+            @Html.DisplayFor(model => model.Checkout)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Customer.FirstName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Store)
@@ -31,6 +37,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.InventoryId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.OrderId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

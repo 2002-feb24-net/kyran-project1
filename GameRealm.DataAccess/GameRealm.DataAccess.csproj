@@ -18,8 +18,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GameRealm.Library\GameRealm.Domain.csproj" />
-    <ProjectReference Include="..\GameRealm.Interface\GameRealm.Interface.csproj" />
     <ProjectReference Include="..\GameRealm.Library\GameRealm.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>

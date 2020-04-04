@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GameRealm.Interface
 {
-    public interface IDataInventory
+    public interface IInventory
     {
         public int InventoryId { get; set; }
         public int? Quantity { get; set; }

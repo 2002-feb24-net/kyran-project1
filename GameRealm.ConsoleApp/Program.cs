@@ -4,7 +4,6 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using GameRealm.DataAccess;
 using GameRealm.DataAccess.Model;
-using GameRealm.Library;
 
 // TO BE IMPLEMENTED:
 // Exception handling, unit tests, order history, search of customers, (search) order details table, secretconfiguration, inventory decrement on order placement, pick product quantity on order, 

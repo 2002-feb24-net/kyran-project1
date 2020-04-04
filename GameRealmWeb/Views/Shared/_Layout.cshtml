@@ -10,35 +10,78 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GameRealm</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GameRealm</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Locations" asp-action="Index">Store Locations</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Purchase" asp-action="BuyGame">Buy Games</a>
-                        </li>
-                    </ul>
+                    <p>
+                        <meta name="viewport" content="width=device-width, initial-scale=1">
+                        <style>
+                            .btn {
+                                background-color: #2483db;
+                                border: none;
+                                color: white;
+                                padding: 2px 4px;
+                                text-align: center;
+                                font-size: 16px;
+                                margin: 4px 2px;
+                                opacity: 0.8;
+                                transition: 0.3s;
+                            }
+
+                                .btn:hover {
+                                    opacity: 1
+                                }
+                        </style>
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="btn" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn" asp-area="" asp-controller="Locations" asp-action="Index">Locations</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn" asp-area="" asp-controller="Games" asp-action="Index">Shop</a>
+                            </li>
+                        </ul>
+                    </p>
                 </div>
-                <div class="topnav-right">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
-                </div>
+                <p>
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <style>
+                        .btn {
+                            background-color: #2483db;
+                            border: none;
+                            color: white;
+                            padding: 4px 8px;
+                            text-align: center;
+                            font-size: 16px;
+                            margin: 4px 2px;
+                            opacity: 0.8;
+                            transition: 0.3s;
+                        }
+
+                            .btn:hover {
+                                opacity: 1
+                            }
+                    </style>
+                    <div class="topnav-right">
+                        <a class="btn" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
+                    </div>
+                    <div class="topnav-right">
+                        <a class="btn" asp-area="" asp-controller="Customers" asp-action="Create">Create Account</a>
+                    </div>
+                </p>
             </div>
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+            <main role="main" class="pb-3">
             @RenderBody()
-        </main>
+            </main>
     </div>
 
     <footer class="border-top footer text-muted">

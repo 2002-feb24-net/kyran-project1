@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GameRealm.DataAccess.Model
+namespace GameRealm.Domain.Model
 {
     public partial class Orderline
     {

@@ -8,12 +8,15 @@ namespace GameRealmWeb.ViewModels
 {
     public class GamesViewModel
     {
-        [Display (Name = "ID")]
-        public int id { get; set; }
-        [Required]
-        [MaxLength(50)]
-        public string Name { get; set; }
-        [Required]
+        public int ProductId { get; set; }
+        public string Title { get; set; }
+        public string Genre { get; set; }
+        [DataType(DataType.DateTime)]
+        public DateTime? Release { get; set; }
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
+        public int? Quantity { get; set; }
+        [DataType(DataType.ImageUrl)]
+        public string image { get; set; }
     }
 }

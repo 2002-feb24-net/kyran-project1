@@ -4,55 +4,31 @@ using GameRealm.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameRealm.Domain.Model;
 
 namespace GameRealm.DataAccess
 {
-    public class LocationsDAL
+    public class LocationsDAL : ILocations
     //customer data access library
     {
-        public void SaveStore(IDataStore store)
+        public List<Inventory> GetInventory(int id)
         {
-            using Game_RealmContext context = new Game_RealmContext();
-            var S_Stores = new Locations();
-            // add BusinessLogic Store to DbStores
-            S_Stores.StoreName = store.StoreName;
-            S_Stores.Street = store.Street;
-            S_Stores.City = store.City;
-            S_Stores.State = store.State;
-            S_Stores.ZipCode = store.Zipcode;
-
-
-            context.Add(S_Stores);
-            context.SaveChanges();
+            throw new NotImplementedException();
         }
 
-        public void InitializeStore(Locations S_Stores, IDataStore store)
+        public List<Locations> GetList()
         {
-            using Game_RealmContext context = new Game_RealmContext();
-            store.StoreName = S_Stores.StoreName;
-            store.Street = S_Stores.Street;
-            store.City = S_Stores.City;
-            store.State = S_Stores.State;
-            store.Zipcode = S_Stores.ZipCode;
-            store.StoreId = S_Stores.StoreId;
+            throw new NotImplementedException();
         }
 
-        public List<Locations> LoadAllStores()
+        public int GetQty(int id)
         {
-            using Game_RealmContext context = new Game_RealmContext();
-            return context.Locations.ToList();
-
+            throw new NotImplementedException();
         }
 
-        public Locations LoadStoreByID(int storeID)
+        public void UpdateInventory(int id, int qty)
         {
-            using Game_RealmContext context = new Game_RealmContext();
-
-            var storeMatched = from store in context.Locations
-                               where store.StoreId == storeID
-                               select store;
-
-            return storeMatched.First();
+            throw new NotImplementedException();
         }
     }
 }

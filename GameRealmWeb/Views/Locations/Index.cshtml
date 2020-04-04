@@ -1,14 +1,11 @@
-﻿@model IEnumerable<GameRealm.DataAccess.Model.Locations>
+﻿@model IEnumerable<GameRealm.Domain.Model.Locations>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Game Realm Locations</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -20,18 +17,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Street)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.State)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ZipCode)
             </th>
             <th></th>
         </tr>
@@ -49,21 +34,8 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Street)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.State)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ZipCode)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.StoreId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.StoreId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.StoreId">Delete</a>
+                <a asp-controller="Inventories" asp-action="Index" asp-route-id="@item.Inventory">Inventory</a> 
             </td>
         </tr>
 }

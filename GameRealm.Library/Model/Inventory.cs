@@ -1,17 +1,17 @@
-﻿using GameRealm.Interface;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace GameRealm.Library
+namespace GameRealm.Domain.Model
 {
-    public class Inventory : IDataInventory
+    public partial class Inventory
     {
-        // link each product instance with one store
         public int InventoryId { get; set; }
-
-        public int? Quantity { get; set; }
-        public int? StoreId { get; set; }
+        public int StoreId { get; set; }
         public int ProductId { get; set; }
+        public int Quantity { get; set; }
+        public string Title { get; set; }
+
+        public virtual Games Product { get; set; }
+        public virtual Locations Store { get; set; }
     }
 }

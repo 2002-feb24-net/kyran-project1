@@ -1,6 +1,5 @@
 using GameRealm.DataAccess;
 using GameRealm.DataAccess.Model;
-using GameRealm.Library;
 using System;
 
 namespace GameRealm.ConsoleApp

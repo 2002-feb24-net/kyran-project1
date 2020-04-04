@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GameRealm.DataAccess;
 using GameRealm.DataAccess.Model;
+using GameRealm.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,9 +28,13 @@ namespace ClientMVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<OrdersDAL, OrdersDAL>();
-            services.AddTransient<CustomerDAL, CustomerDAL>();
-            services.AddTransient<LocationsDAL, LocationsDAL>();
+
+            services.AddRazorPages();
+
+            services.AddDbContext<Game_RealmContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Game_Realm")));
+            services.AddTransient<IOrders, OrdersDAL>();
+            services.AddTransient<ICustomer, CustomerDAL>();
+            services.AddTransient<ILocations, LocationsDAL>();
             services.AddLogging(logger =>
             {
                 logger.AddConfiguration(Configuration.GetSection("Logging"));               

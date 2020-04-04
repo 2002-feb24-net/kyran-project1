@@ -1,39 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using GameRealm.DataAccess.Model;
+using GameRealm.Domain.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameRealmWeb.Controllers
 {
     public class CustomersController : Controller
     {
-        private readonly Game_RealmContext _context;
+        private readonly Game_RealmContext ctx;
 
         public CustomersController(Game_RealmContext context)
         {
-            _context = context;
+            ctx = context;
         }
 
         // GET: Customers
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Customer.ToListAsync());
+            return View( ctx.Customer.ToList());
         }
 
         // GET: Customers/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var customer = await _context.Customer
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
+            var customer =  ctx.Customer
+                .FirstOrDefault(m => m.CustomerId == id);
             if (customer == null)
             {
                 return NotFound();
@@ -42,37 +40,31 @@ namespace GameRealmWeb.Controllers
             return View(customer);
         }
 
-        // GET: Customers/Create
         public IActionResult Create()
         {
             return View();
         }
-
-        // POST: Customers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerId,FirstName,LastName,Phone,Email,Street,City,State,ZipCode,Password,UserName")] Customer customer)
+        public IActionResult Create([Bind("CustomerId,FirstName,LastName,Phone,Email,Street,City,State,ZipCode,Password,UserName")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(customer);
-                await _context.SaveChangesAsync();
+                ctx.Add(customer);
+                ctx.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(customer);
         }
 
-        // GET: Customers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var customer = await _context.Customer.FindAsync(id);
+            var customer = ctx.Customer.Find(id);
             if (customer == null)
             {
                 return NotFound();
@@ -80,12 +72,9 @@ namespace GameRealmWeb.Controllers
             return View(customer);
         }
 
-        // POST: Customers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CustomerId,FirstName,LastName,Phone,Email,Street,City,State,ZipCode,Password,UserName")] Customer customer)
+        public IActionResult Edit(int id, [Bind("CustomerId,FirstName,LastName,Phone,Email,Street,City,State,ZipCode,Password,UserName")] Customer customer)
         {
             if (id != customer.CustomerId)
             {
@@ -96,10 +85,10 @@ namespace GameRealmWeb.Controllers
             {
                 try
                 {
-                    _context.Update(customer);
-                    await _context.SaveChangesAsync();
+                    ctx.Update(customer);
+                     ctx.SaveChanges();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException)
                 {
                     if (!CustomerExists(customer.CustomerId))
                     {
@@ -115,16 +104,16 @@ namespace GameRealmWeb.Controllers
             return View(customer);
         }
 
-        // GET: Customers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+        public  IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var customer = await _context.Customer
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
+            var customer =  ctx.Customer
+                .FirstOrDefault(m => m.CustomerId == id);
             if (customer == null)
             {
                 return NotFound();
@@ -133,20 +122,38 @@ namespace GameRealmWeb.Controllers
             return View(customer);
         }
 
-        // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public  IActionResult DeleteConfirmed(int id)
         {
-            var customer = await _context.Customer.FindAsync(id);
-            _context.Customer.Remove(customer);
-            await _context.SaveChangesAsync();
+            var customer =  ctx.Customer.Find(id);
+            ctx.Customer.Remove(customer);
+             ctx.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CustomerExists(int id)
         {
-            return _context.Customer.Any(e => e.CustomerId == id);
+            return ctx.Customer.Any(e => e.CustomerId == id);
+        }
+
+        public  IActionResult Orders()
+        {
+            var game_RealmContext = ctx.Orders.Include(o => o.Customer).Include(o => o.Store);
+            return View( game_RealmContext.ToList());
+        }
+
+        public IActionResult Search(string searchString)
+        {
+            var custFind = from m in ctx.Customer
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                custFind = custFind.Where(s => s.FirstName.ToUpper().Contains(searchString));
+            }
+
+            return View( custFind.ToList());
         }
     }
 }

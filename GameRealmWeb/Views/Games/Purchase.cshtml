@@ -1,10 +1,10 @@
-﻿@model GameRealm.DataAccess.Model.Games
+﻿@model GameRealm.Domain.Model.Games
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Purchase";
 }
 
-<h1>Create</h1>
+<h1>Purchase Game</h1>
 
 <h4>Games</h4>
 <hr />
@@ -48,3 +48,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

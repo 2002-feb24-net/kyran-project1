@@ -1,70 +1,109 @@
 ﻿using GameRealm.Interface;
 using System.Collections.Generic;
 using System.Linq;
-using GameRealm.Library;
-using GameRealm.DataAccess.Model;
+using GameRealm.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
+using GameRealm.DataAccess.Model;
+using System.Threading.Tasks;
 
 namespace GameRealm.DataAccess
 {
-    public class CustomerDAL
+    public class CustomerDAL : ICustomer
     //customer data access library
     {
         Game_RealmContext ctx = new Game_RealmContext();
-        public void Add(Library.Customer customer)
+
+        public void Add(Customer cust)
         {
-            using Game_RealmContext  ctx= new Game_RealmContext();
-            var C_Customer = new Model.Customer();
-            // add BusinessLogic Customer to DbCustomer
-            C_Customer.FirstName = customer.firstName;
-            C_Customer.LastName = customer.lastName;
-            C_Customer.Password = customer.Password;
-            C_Customer.UserName = customer.Username;
-
-
-            ctx.Add(C_Customer);
-            ctx.SaveChanges();
+            throw new NotImplementedException();
         }
 
-        public List<Model.Customer> LoadAllCustomers()
+        public int AddCust(string firstName, string lastName, string userName, string eMail, string passWord)
         {
-            using Game_RealmContext ctx = new Game_RealmContext();
-            return ctx.Customer.ToList();
-
+            throw new NotImplementedException();
         }
 
-        public Model.Customer LoadbyID(int customerID)
+        public bool CheckUnique(int mode, string check)
         {
-            return ctx.Customer.Find(customerID);
+            throw new NotImplementedException();
+        }
+
+        public void Edit(Customer cust)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Customer FindByID(int custID)
+        {
+            return ctx.Customer.Find(custID);
+        }
+        public Customer FindByFirstName(string firstName)
+        {
+            IQueryable<Customer> cust = ctx.Customer.Where(u => u.FirstName == firstName);
+            if (cust.Count() == 0)
+            {
+                return null;
+            }
+            return cust.First();
+        }
+
+        public IEnumerable<Customer> GetCusts()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Customer> GetList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int NumberOfCustomers()
+        {
+            throw new NotImplementedException();
         }
 
         public void Remove(int id)
         {
-            var removeCust = ctx.Customer.Find(id);
-            ctx.Customer.Remove(removeCust);
-            ctx.SaveChanges();
+            throw new NotImplementedException();
         }
-        public int AddCust(string fName, string lName, string username, string email, string pass)
+
+        public IEnumerable<Customer> Search(int uChoice = 0, params string[] userSearch)
         {
-            var new_cust = new Model.Customer
+            switch (uChoice)
             {
-                FirstName = fName,
-                Email = email,
-                UserName = username,
-                Password = pass,
-                LastName = lName
-            };
-            try
-            {
-                ctx.Customer.Add(new_cust);
-                ctx.SaveChanges();
+                case 1:
+
+                    return ctx.Customer.Where(cust => cust.FirstName == userSearch[0] && cust.LastName == userSearch[1]);
+
+                case 2:
+
+                    return ctx.Customer.Where(cust => cust.UserName == userSearch[0]);
+
+                default:
+
+                    return ctx.Customer.Where(cust => cust.Email == userSearch[0]);
             }
-            catch (DbUpdateException)
+        }
+
+        public int ValidateCustomer(int id = -1, params string[] name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string VerifyCustomer(string username, out int id)
+        {
+            var cust = ctx.Customer.FirstOrDefault(cust => cust.UserName == username);
+            if (cust == null)
             {
-                Console.WriteLine("Email/username already exists");
+                id = -1;
             }
-            return new_cust.CustomerId;
+            else
+            {
+                id = cust.CustomerId;
+                return cust.Password;
+            }
+            return ""; 
         }
     }
 }

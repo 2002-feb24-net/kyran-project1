@@ -1,28 +1,23 @@
-﻿@model IEnumerable<GameRealm.DataAccess.Model.Inventory>
+﻿@model IEnumerable<GameRealm.Domain.Model.Inventory>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Inventory";
 }
 
-<h1>Index</h1>
+<h1>Inventory</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Store)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
             </th>
             <th></th>
         </tr>
@@ -31,21 +26,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.DisplayFor(modelItem => item.Store.StoreName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Product.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Store.StoreName)
+                @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.InventoryId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.InventoryId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.InventoryId">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.InventoryId">Details</a> 
             </td>
         </tr>
 }

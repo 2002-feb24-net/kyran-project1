@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
+using GameRealm.Domain.Model;
 
 namespace GameRealm.DataAccess.Model
 {
@@ -116,6 +117,10 @@ namespace GameRealm.DataAccess.Model
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
+
+                entity.Property(e => e.image)
+                .HasMaxLength(255)
+                .HasColumnName("image");
             });
 
             modelBuilder.Entity<Inventory>(entity =>

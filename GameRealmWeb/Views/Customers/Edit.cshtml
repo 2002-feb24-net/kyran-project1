@@ -1,4 +1,4 @@
-﻿@model GameRealm.DataAccess.Model.Customer
+﻿@model GameRealm.Domain.Model.Customer
 
 @{
     ViewData["Title"] = "Edit";
@@ -74,3 +74,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

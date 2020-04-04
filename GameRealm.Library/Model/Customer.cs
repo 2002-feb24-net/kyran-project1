@@ -1,39 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using GameRealm.Interface;
+using System.ComponentModel.DataAnnotations;
 
-namespace GameRealm.Library
+namespace GameRealm.Domain.Model
 {
-    public class Customer : User, ICustomer
+    public partial class Customer
     {
-        // implements username and password validation from User
-        // have to override username methods because using Full name ("FirstName LastName")
-        // otherwise methods would talk about username when user inputs full name
-        public string firstName { get; set; }
-        public string lastName { get; set; }
+        public Customer()
+        {
+            Orders = new HashSet<Orders>();
+        }
+
         public int CustomerId { get; set; }
+        [Display(Name = "First")]
+        public string FirstName { get; set; }
+        [Display(Name = "Last")]
+        public string LastName { get; set; }
+        public string Phone { get; set; }
+        [Display(Name = "E-Mail")]
+        public string Email { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string ZipCode { get; set; }
+        public string Password { get; set; }
+        [Display(Name = "Profile")]
+        public string UserName { get; set; }
 
-        public Customer( string fName, string lName, string uniqueUsername, string password)
-            // registers a customer, can load data from existing customer in db
-        {
-            firstName = fName;
-            lastName = lName;
-            Username = uniqueUsername;
-            Password = password;
-            /*Username = uniqueUsername;
-            Password = password;*/
-
-        }
-
-        static string SearchCustomerByName (string cname)
-        {
-            //connect to database get loaded list
-            throw new NotImplementedException();
-        }
-
-        
-
-
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }
