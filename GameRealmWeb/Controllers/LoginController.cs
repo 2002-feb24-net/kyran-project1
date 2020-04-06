@@ -37,7 +37,7 @@ namespace GameRealmWeb.Controllers
                     if(currentCustomer.FirstName == currUser.FirstName)
                     {
                         HttpContext.Session.SetString("AcctID", currentCustomer.CustomerId.ToString());
-                        return Redirect("/Locations/Index");
+                        return Redirect("/Orders/Index");
                     }
                 }
             }
