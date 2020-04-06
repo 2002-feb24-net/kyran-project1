@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace GameRealm.Domain.Model
+namespace GameRealmWeb.ViewModels
 {
-    public partial class Inventory
+    public class InventoryViewModel
     {
         public int InventoryId { get; set; }
         public int StoreId { get; set; }
         public int ProductId { get; set; }
         public int Quantity { get; set; }
         public string Title { get; set; }
-
-        public virtual Games Product { get; set; }
-        public virtual Locations Store { get; set; }
     }
 }

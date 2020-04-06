@@ -56,7 +56,7 @@ namespace GameRealm.DataAccess
         public int Add(Orders o)
         {
             ctx.Orders.Add(o);
-            ctx.SaveChanges();
+/*            ctx.SaveChanges();*/
             ctx.Entry(o).Reload();
             return o.CustomerId;
         }
@@ -106,11 +106,6 @@ namespace GameRealm.DataAccess
             return new_order.CustomerId;
         }
 
-        //Searches orders by given param, param is checked against Order columns according to mode
-        //Mode Codes:
-        //  1: Get orders by location
-        //  2: By customer
-        //  3: Get details of 1 specific order
         public List<Orders> GetOrders(int mode = 0, params string[] search_param)
         {
             var orderList = ctx.Orders.Include("Store").Include("Customer").AsQueryable();

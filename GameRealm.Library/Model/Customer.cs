@@ -24,7 +24,7 @@ namespace GameRealm.Domain.Model
         public string State { get; set; }
         public string ZipCode { get; set; }
         public string Password { get; set; }
-        [Display(Name = "Profile")]
+        [Display(Name = "Profile Name")]
         public string UserName { get; set; }
 
         public virtual ICollection<Orders> Orders { get; set; }

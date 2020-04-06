@@ -12,5 +12,7 @@ namespace GameRealm.Domain.Model
 
         public virtual Orders Order { get; set; }
         public virtual Games Product { get; set; }
+
+        public virtual List<Inventory> stock { get; set; }
     }
 }

@@ -12,19 +12,20 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="CustomerID" class="control-label">Customer Name</label>
-                <select asp-for="CustomerID" class="form-control" asp-items="ViewBag.CustomerID"></select>
+                <label asp-for="CustomerId" class="control-label">Customer Name</label>
+                <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="StoreId" class="control-label">Store Location</label>
-                <select asp-for="StoreId" class="form-control" asp-items="ViewBag.StoreId"></select>
+                <label asp-for="LocationId" class="control-label">Store Location</label>
+                <select asp-for="LocationId" class="form-control" asp-items="ViewBag.StoreId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="ProductID" class="control-label">Game Title</label>
                 <select asp-for="ProductID" class="form-control" asp-items="ViewBag.ProductID"></select>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Checkout" class="btn btn-primary" />
+            <div class="container">
+                <input type="submit" value="Add to Cart" class="btn btn-primary" asp-controller="Orders" asp-action="AddToCart" /> 
+                <input type="submit" value="Place Order" class="btn btn-primary" asp-controller="Orders" asp-action="Create" />
             </div>
         </form>
     </div>

@@ -30,13 +30,13 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Customer.FirstName)
+                    @Html.DisplayFor(modelItem => @item.Customer.FirstName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Store.StoreName)
+                    @Html.DisplayFor(modelItem => @item.Store.StoreName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Checkout)
+                    @Html.DisplayFor(modelItem => @item.Checkout)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Time)

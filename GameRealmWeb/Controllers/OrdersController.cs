@@ -7,12 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GameRealm.DataAccess.Model;
 using GameRealm.Domain.Model;
+using GameRealm.DataAccess;
+using System.Text.Json;
+using GameRealmWeb.ViewModels;
+using System.Collections;
+using GameRealm.Interface;
 
 namespace GameRealmWeb.Controllers
 {
     public class OrdersController : Controller
     {
+
+        OrdersDAL orderRepo = new OrdersDAL();
         private readonly Game_RealmContext _context;
+        private readonly GamesDAL _game;
+        private readonly Customer _cust;
 
         public OrdersController(Game_RealmContext context)
         {
@@ -56,19 +65,46 @@ namespace GameRealmWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("OrderId,StoreId,CustomerId,ProductId")] Orders orders)
+        public IActionResult Create([Bind("LocationId,CustomerId,ProductID")] OrdersViewModel ordersV)
         {
+            Game_RealmContext ctx = new Game_RealmContext();
+
             if (ModelState.IsValid)
             {
-                orders.Time = DateTime.Now;
-                _context.Add(orders);
-                 _context.SaveChanges();
+                Orders newOrd = new Orders
+                {
+                    CustomerId = ordersV.CustomerId,
+                    StoreId = ordersV.LocationId,
+                    Time = DateTime.Now,
+                    Checkout = 0
+                };
+
+
+
+                _context.Add(newOrd);
+                _context.SaveChanges();
+                _context.Entry(newOrd).Reload();
+                Orderline ords = new Orderline
+                {
+                    OrderId = newOrd.OrderId,
+                    ProductId = ordersV.ProductID,
+                    Quantity = 1,
+                };
+
+                _context.Orderline.Add(ords);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
+
+
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "FirstName", orders.CustomerId);
-            ViewData["StoreId"] = new SelectList(_context.Locations, "StoreId", "StoreName", orders.StoreId);
+
+
+
+            ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "FirstName");
+            ViewData["StoreId"] = new SelectList(_context.Locations, "StoreId", "StoreName");
             ViewData["ProductID"] = new SelectList(_context.Games, "ProductId", "Title");
-            return View(orders);
+            ViewData["Price"] = new SelectList(_context.Games, "Price", "Price");
+            return View(ordersV);
         }
 
         public IActionResult Edit(int? id)
@@ -161,7 +197,76 @@ namespace GameRealmWeb.Controllers
         public IActionResult Option()
         {
             return View();
+        }   
+
+        public IActionResult Checkout()
+        {
+           /*List<int>
+           */
+            return View();
         }
+
+        public IActionResult CustOrderSearch(string searchString)
+        {
+            var custOrder = from m in _context.Orders
+                           where m.Customer.FirstName == searchString || m.Customer.LastName == searchString
+                           select m;
+
+            var customerOrder = custOrder.ToList();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                custOrder = custOrder.Where(s => s.Customer.FirstName.ToUpper().Contains(searchString) || s.Customer.LastName.ToUpper().Contains(searchString));
+            }
+            else if (searchString == null)
+            {
+                return View("Index");
+            }
+            else
+            {
+                return View("Search");
+            }
+
+            return View(customerOrder);
+        }
+
+        public IActionResult custOrder(int id)
+        {
+            id = _cust.CustomerId;
+
+            var custOrderhistory = from cust in _context.Orders
+                                   where cust.CustomerId == id
+                                   select cust;
+
+                return View(custOrderhistory.ToList());
+        }
+
+ /*       public IActionResult LocOrder()
+        {
+
+
+        }*/
+
+        public IActionResult AddToCart([Bind("ProductId")] Orderline orders)
+        {
+            List<int> gamesAdded = JsonSerializer.Deserialize<List<int>>((string)TempData["cart"]);
+
+            if (gamesAdded == null)
+            {
+                gamesAdded = new List<int> { orders.ProductId };
+            }
+            else
+            {
+                gamesAdded.Add(orders.ProductId);
+            }
+
+            TempData["cart"] = JsonSerializer.Serialize(gamesAdded);
+
+
+
+            return View();
+        }
+
 
 
     }

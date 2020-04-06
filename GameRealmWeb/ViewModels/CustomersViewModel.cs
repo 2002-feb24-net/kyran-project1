@@ -10,9 +10,9 @@ namespace GameRealmWeb.ViewModels
     {
         
         public int CustomerId { get; set; }
-        [Required(ErrorMessage = "You must enter your Firstname!")]
+        [Required(ErrorMessage = "You must enter your First Name!")]
         public string FirstName { get; set; }
-        [Required(ErrorMessage = "You must enter your Lastname!")]
+        [Required(ErrorMessage = "You must enter your Last Name!")]
         public string LastName { get; set; }
         [Required(ErrorMessage = "You must enter your Phone Number!")]
         [DataType(DataType.PhoneNumber)]

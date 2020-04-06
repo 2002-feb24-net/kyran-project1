@@ -1,0 +1,44 @@
+﻿@model IEnumerable<GameRealm.Domain.Model.Inventory>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Game Realm Locations</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StoreId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.StoreId">Details</a> |
+                    <a asp-controller="Locations" asp-action="Index">Back</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

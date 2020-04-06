@@ -150,7 +150,12 @@ namespace GameRealmWeb.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                custFind = custFind.Where(s => s.FirstName.ToUpper().Contains(searchString));
+                custFind = custFind.Where(s => s.FirstName.ToUpper().Contains(searchString) || s.LastName.ToUpper().Contains(searchString));
+             
+            }
+            else if(searchString == null)
+            {
+                return View("Index");
             }
 
             return View( custFind.ToList());
