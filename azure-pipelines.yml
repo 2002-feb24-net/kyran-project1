@@ -28,11 +28,10 @@ steps:
     dotnet build
   displayName: 'dotnet build'
 
-- task: SonarCloudAnalyze@1
+#sonarcloud anlyze goes here
 
-- task: SonarCloudPublish@1
-  inputs:
-    pollingTimeoutSec: '300'
+#sonarcloud publish goes here
+
 # Want a sonar cloud analysis even if tests fail
 
 
@@ -59,7 +58,7 @@ steps:
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure subscription 1(1221fe95-8e35-45f8-ae94-5e2cf04ba808)'
+    azureSubscription: 'Azure subscription 1(a2152353-9b25-48cf-bad2-948e50f630f2)'
     appType: 'webApp'
-    WebAppName: 'Restaurant-Haroldo'
+    WebAppName: 'Realm-of-Games'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
