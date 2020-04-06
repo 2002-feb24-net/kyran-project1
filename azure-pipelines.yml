@@ -1,0 +1,65 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pr: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo 'Showing directory contents'
+    ls
+  displayName: 'Show directory contents'
+
+#sonarcloud prepare
+
+
+
+- script: |
+    dotnet build
+  displayName: 'dotnet build'
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
+# Want a sonar cloud analysis even if tests fail
+
+
+- script: dotnet test --logger trx
+  displayName: dotnet test
+
+# the default "condition" for every step is "succeeded()" - run this step if the previous step succeeded
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testRunner: VSTest
+    testResultsFiles: '**/*.trx'
+
+  # have the build running agent running steps publish test build logs
+
+
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(1221fe95-8e35-45f8-ae94-5e2cf04ba808)'
+    appType: 'webApp'
+    WebAppName: 'Restaurant-Haroldo'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
