@@ -95,6 +95,7 @@ namespace GameRealmWeb.Controllers
 
                 _context.Orderline.Add(ords);
                 _context.SaveChanges();
+                _context.Entry(ords).Reload();
                 return RedirectToAction(nameof(Create), orderlinesController);
 
 
