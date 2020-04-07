@@ -31,7 +31,7 @@ namespace GameRealm.DataAccess.Model
                                   .SetBasePath(Directory.GetCurrentDirectory())
                                   .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                                   .Build();
-            string conn = config.GetConnectionString("Default");
+            string conn = config.GetConnectionString("Game_Realm");
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(conn);

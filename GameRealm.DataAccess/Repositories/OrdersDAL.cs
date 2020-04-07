@@ -135,5 +135,21 @@ namespace GameRealm.DataAccess
                         .Include("OrderItem.P.P")
                         .ToList();
         }
+
+        public Orders orderDet(int orderid)
+        {
+            return ctx.Orders
+              .Include(o => o.Customer)
+              .Include(o => o.Store)
+              .Include(o => o.Orderline)
+              .ThenInclude(or => or.Product)
+              .FirstOrDefault(m => m.OrderId == orderid);
+        }
+
+        public Orders preOrder()
+        {
+            var lastOrder = ctx.Orders.Max(s => s.OrderId);
+            return orderDet(lastOrder);
+        }
     }
 }

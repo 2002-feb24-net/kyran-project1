@@ -5,18 +5,15 @@
 }
 
 <h1>List Of Games</h1>
-
 <p>
     <div class="align-content-center">
         <a class="btn" asp-area="" asp-controller="Orders" asp-action="Create">Place an Order</a><a class="btn" asp-area="" asp-controller="Orders" asp-action="Index">Show Orders</a><a class="btn" asp-area="" asp-controller="Locations" asp-action="Index">Show Locations</a><a class="btn" asp-area="" asp-controller="Customers" asp-action="Index">List of Subscribers</a>
     </div>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.image)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
@@ -30,24 +27,22 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.image)
-            </th>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                $@Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.ProductId">Details</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ProductId">Details</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

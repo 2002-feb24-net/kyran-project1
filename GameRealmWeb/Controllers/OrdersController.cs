@@ -71,8 +71,10 @@ namespace GameRealmWeb.Controllers
 
             if (ModelState.IsValid)
             {
+                string orderlinesController = "Orderlines";
                 Orders newOrd = new Orders
                 {
+                    
                     CustomerId = ordersV.CustomerId,
                     StoreId = ordersV.LocationId,
                     Time = DateTime.Now,
@@ -93,18 +95,18 @@ namespace GameRealmWeb.Controllers
 
                 _context.Orderline.Add(ords);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Create), orderlinesController);
 
 
             }
 
-
+            
 
             ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "FirstName");
             ViewData["StoreId"] = new SelectList(_context.Locations, "StoreId", "StoreName");
             ViewData["ProductID"] = new SelectList(_context.Games, "ProductId", "Title");
             ViewData["Price"] = new SelectList(_context.Games, "Price", "Price");
-            return View(ordersV);
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Edit(int? id)
@@ -250,11 +252,6 @@ namespace GameRealmWeb.Controllers
             return View(custOrderhistory);
         }
 
- /*       public IActionResult LocOrder()
-        {
-
-
-        }*/
 
         public IActionResult AddToCart([Bind("ProductId")] Orderline orders)
         {

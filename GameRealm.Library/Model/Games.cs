@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace GameRealm.Domain.Model
 {
@@ -15,6 +16,7 @@ namespace GameRealm.Domain.Model
         public string Title { get; set; }
         public string Genre { get; set; }
         public DateTime? Release { get; set; }
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
         public int? Quantity { get; set; }
         public string image { get; set; }
