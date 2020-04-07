@@ -230,15 +230,24 @@ namespace GameRealmWeb.Controllers
             return View(customerOrder);
         }
 
-        public IActionResult custOrder(int id)
+        public IActionResult custOrder(int? id)
         {
-            id = _cust.CustomerId;
+            if (id == null)
+            {
+                return NotFound();
+            }
 
             var custOrderhistory = from cust in _context.Orders
                                    where cust.CustomerId == id
                                    select cust;
+/*
+            var custHistory = _context.Orders.Where(c => c.CustomerId == id);*/
+            if (custOrderhistory == null)
+            {
+                return NotFound();
+            }
 
-                return View(custOrderhistory.ToList());
+            return View(custOrderhistory);
         }
 
  /*       public IActionResult LocOrder()

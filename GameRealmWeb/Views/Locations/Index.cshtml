@@ -5,6 +5,12 @@
 }
 
 <h1>Game Realm Locations</h1>
+<br />
+<p>
+    <div class="align-content-center">
+        <a class="btn" asp-area="" asp-controller="Inventory" asp-action="index">Show all Inventory</a>
+    </div>
+</p>
 
 <table class="table">
     <thead>
@@ -34,8 +40,7 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.StoreId">Details</a> |
-                <a asp-controller="Inventory" asp-action="Index" asp-route-id="@item.Inventory">Inventory</a> 
+                <a asp-action="Details" asp-route-id="@item.StoreId">Details</a>
             </td>
         </tr>
 }

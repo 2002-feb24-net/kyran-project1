@@ -33,8 +33,7 @@ namespace GameRealmWeb.Controllers
                 return NotFound();
             }
 
-            var locations =  ctx.Locations
-                .FirstOrDefault(m => m.StoreId == id);
+            var locations =  ctx.Locations.FirstOrDefault(m => m.StoreId == id);
             if (locations == null)
             {
                 return NotFound();

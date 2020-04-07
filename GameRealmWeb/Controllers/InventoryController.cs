@@ -19,25 +19,25 @@ namespace GameRealmWeb.Controllers
             _context = context;
         }
 
-        // GET: Inventories
+
         public IActionResult Index()
         {
             var game_RealmContext = _context.Inventory.Include(i => i.Product).Include(i => i.Store);
             return View( game_RealmContext.ToList());
         }
 
-        // GET: Inventories/Details/5
-        public async Task<IActionResult> Details(int? id)
+
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var inventory = await _context.Inventory
+            var inventory = _context.Inventory
                 .Include(i => i.Product)
                 .Include(i => i.Store)
-                .FirstOrDefaultAsync(m => m.InventoryId == id);
+                .FirstOrDefault(m => m.InventoryId == id);
             if (inventory == null)
             {
                 return NotFound();
@@ -46,7 +46,6 @@ namespace GameRealmWeb.Controllers
             return View(inventory);
         }
 
-        // GET: Inventories/Create
         public IActionResult Create()
         {
             ViewData["ProductId"] = new SelectList(_context.Games, "ProductId", "Title");
@@ -54,17 +53,15 @@ namespace GameRealmWeb.Controllers
             return View();
         }
 
-        // POST: Inventories/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("InventoryId,StoreId,ProductId,Quantity,Title")] Inventory inventory)
+        public IActionResult Create([Bind("InventoryId,StoreId,ProductId,Quantity,Title")] Inventory inventory)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(inventory);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ProductId"] = new SelectList(_context.Games, "ProductId", "Title", inventory.ProductId);
@@ -72,15 +69,15 @@ namespace GameRealmWeb.Controllers
             return View(inventory);
         }
 
-        // GET: Inventories/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+ 
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var inventory = await _context.Inventory.FindAsync(id);
+            var inventory = _context.Inventory.Find(id);
             if (inventory == null)
             {
                 return NotFound();
@@ -90,12 +87,10 @@ namespace GameRealmWeb.Controllers
             return View(inventory);
         }
 
-        // POST: Inventories/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("InventoryId,StoreId,ProductId,Quantity,Title")] Inventory inventory)
+        public IActionResult Edit(int id, [Bind("InventoryId,StoreId,ProductId,Quantity,Title")] Inventory inventory)
         {
             if (id != inventory.InventoryId)
             {
@@ -107,7 +102,7 @@ namespace GameRealmWeb.Controllers
                 try
                 {
                     _context.Update(inventory);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -127,18 +122,18 @@ namespace GameRealmWeb.Controllers
             return View(inventory);
         }
 
-        // GET: Inventories/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+     
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var inventory = await _context.Inventory
+            var inventory = _context.Inventory
                 .Include(i => i.Product)
                 .Include(i => i.Store)
-                .FirstOrDefaultAsync(m => m.InventoryId == id);
+                .FirstOrDefault(m => m.InventoryId == id);
             if (inventory == null)
             {
                 return NotFound();
@@ -147,14 +142,13 @@ namespace GameRealmWeb.Controllers
             return View(inventory);
         }
 
-        // POST: Inventories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var inventory = await _context.Inventory.FindAsync(id);
+            var inventory = _context.Inventory.Find(id);
             _context.Inventory.Remove(inventory);
-            await _context.SaveChangesAsync();
+             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
